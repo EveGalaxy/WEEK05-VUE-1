@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        shopName: 'NoName Shop',
+        shopName: 'Eve Shop',
         products: [
             {
                 title: "iPhone 11",
@@ -56,4 +56,15 @@ var app = new Vue({
         cart: [],
         show_modal: false
     },
+    methods: {
+        favoriteItem: function(item) {
+            item.is_favorite = !item.is_favorite;
+        },
+        addItem: function(item) {
+            this.cart.push(item);
+        },
+        clearItem: function() {
+            this.cart.splice(0);
+        }
+    }
 })
