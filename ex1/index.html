@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>Basic of VueJS</title>
 </head>
 
@@ -46,6 +46,9 @@
             <!-- ข้อ 1 ----------------------------------------------------------------- -->
             <div id="ex1" class="my-4">
                 <!-- ใส่โค้ดแสดงค่าของตัวแปรใน div นี้ -->
+                <span class="has-text-weight-bold is-size-5">{{student_id}}</span>
+                <br>
+                <span class="is-size-5">{{student_fname+ " " +student_lname}}</span>
             </div>
             <hr>
         </div>
@@ -65,12 +68,12 @@
 
             <!-- ข้อ 2 ----------------------------------------------------------------- -->
             <div id='ex2'>
-                <img src="./image/0.svg">
-                <img src="./image/1.svg">
-                <img src="./image/2.svg">
-                <img src="./image/3.svg">
-                <img src="./image/4.svg">
-                <img src="./image/5.svg">
+                <img src="./image/0.svg" v-show="number_runner == 0">
+                <img src="./image/1.svg" v-show="number_runner == 1">
+                <img src="./image/2.svg" v-show="number_runner == 2">
+                <img src="./image/3.svg" v-show="number_runner == 3">
+                <img src="./image/4.svg" v-show="number_runner == 4">
+                <img src="./image/5.svg" v-show="number_runner == 5">
             </div>
 
             <hr>
@@ -89,9 +92,9 @@
 
             <!-- ข้อ 3 ----------------------------------------------------------------- -->
             <div id='ex3'>
-                <a class="button is-danger">Odd Number</a>
-                <a class="button is-success">Even Number</a>
-                <a class="button is-info">Zero Number</a>
+                <a class="button is-danger" v-if="number_runner%2 != 0">Odd Number</a>
+                <a class="button is-success" v-if="number_runner%2 == 0 && number_runner != 0">Even Number</a>
+                <a class="button is-info" v-if="number_runner == 0">Zero Number</a>
             </div>
 
             <hr>
@@ -105,6 +108,9 @@
 
             <!-- ข้อ 4 ----------------------------------------------------------------- -->
             <div id='ex4'>
+                <ul class="p-2 is-size-4">
+                    <li v-for="item in months">{{ item }}</li>
+                </ul>
             </div>
 
             <hr>
@@ -121,9 +127,9 @@
 
             <!-- ข้อ 5 ----------------------------------------------------------------- -->
             <div id='ex5'>
-                <a class=button>-</a>
+                <a class=button @click="counter--">-</a>
                 <a class="is-size-4 mx-5">{{counter}}</a>
-                <a class=button>+</a>
+                <a class=button @click="counter++">+</a>
             </div>
 
             <hr>
@@ -141,9 +147,9 @@
 
             <!-- ข้อ 6 ----------------------------------------------------------------- -->
             <div id='ex6'>
-                <div class="dropdown is-active">
+                <div :class="['dropdown', {'is-active': isActive}]" @click="isActive = !isActive">
                     <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" >
                             <span>Month Selection</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -152,8 +158,8 @@
                     </div>
                     <div class="dropdown-menu" id="dropdown-menu" role="menu">
                         <div class="dropdown-content">
-                            <a class="dropdown-item">
-                                January
+                            <a class="dropdown-item" v-for="item in months">
+                                {{ item }}
                             </a>
                         </div>
                     </div>
@@ -176,6 +182,11 @@
 
             <!-- ข้อ 7 ----------------------------------------------------------------- -->
             <div id="ex7">
+                <ul class="p-2 is-size-4">
+                    <li v-for="item in week">
+                        <span :style="{ color: item.color }">{{ item.title }}</span>
+                    </li>
+                </ul>
             </div>
 
         </div>
